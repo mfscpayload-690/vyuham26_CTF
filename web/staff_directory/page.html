@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>E Corp Intranet</title>
+  <style>
+    body { font-family: 'Courier New', monospace; max-width: 680px; margin: 50px auto; background:#0b0b0b; color:#c0c0c0; }
+    h1 { color:#e01; letter-spacing:1px; }
+    .sub { color:#666; margin-bottom: 30px; }
+    input { width: 60%; padding:6px; background:#111; color:#0f0; border:1px solid #333; }
+    button { padding:6px 14px; background:#e01; color:#fff; border:none; cursor:pointer; }
+    pre { background:#111; padding:12px; border:1px solid #333; white-space: pre-wrap; word-break: break-all; }
+    .hint { color:#444; font-size: 0.85em; margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <h1>E CORP // INTRANET</h1>
+  <div class="sub">Employee Directory &mdash; internal use only. All activity is logged. Probably.</div>
+
+  <div id="loginBox">
+    <p>Log in with your employee credentials.</p>
+    <input id="u" placeholder="username" /><br/><br/>
+    <input id="p" placeholder="password" type="password" /><br/><br/>
+    <button onclick="doLogin()">Log in</button>
+    <pre id="loginOut"></pre>
+  </div>
+
+  <div id="dirBox" style="display:none">
+    <p>Welcome, <span id="who"></span>. Your employee ID: <code id="myId"></code></p>
+    <p>Look up an employee record by ID:</p>
+    <input id="lookupId" placeholder="empId" />
+    <button onclick="lookup()">Lookup</button>
+    <pre id="dirOut"></pre>
+  </div>
+
+  <div class="hint">hello, friend.</div>
+
+  <script>
+    async function doLogin() {
+      const username = document.getElementById('u').value;
+      const password = document.getElementById('p').value;
+      const r = await fetch('/api/login', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ username, password })
+      });
+      const data = await r.json();
+      document.getElementById('loginOut').textContent = JSON.stringify(data, null, 2);
+      if (data.ok) {
+        document.getElementById('loginBox').style.display = 'none';
+        if (document.getElementById('u').value === 'admin') {
+          const r2 = await fetch('/api/admin/dashboard');
+          document.getElementById('dirOut') // reuse box, but as admin panel
+          document.body.insertAdjacentHTML('beforeend',
+            '<pre>' + JSON.stringify(await r2.json(), null, 2) + '</pre>');
+          return;
+        }
+        document.getElementById('dirBox').style.display = 'block';
+        document.getElementById('who').textContent = data.name;
+        document.getElementById('myId').textContent = data.empId;
+        document.getElementById('lookupId').value = data.empId;
+      }
+    }
+    async function lookup() {
+      const id = document.getElementById('lookupId').value;
+      const r = await fetch('/api/employee/' + encodeURIComponent(id));
+      document.getElementById('dirOut').textContent = JSON.stringify(await r.json(), null, 2);
+    }
+  </script>
+</body>
+</html>
