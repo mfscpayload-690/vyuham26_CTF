@@ -24,6 +24,36 @@ An archive of challenge artifacts, forensic investigations, custom exploit tooli
 
 ---
 
+## Team Members
+
+<table>
+  <tr>
+    <td align="center" width="150px">
+      <a href="https://github.com/mfscpayload-690">
+        <img src="https://github.com/mfscpayload-690.png?size=100" width="100" height="100" style="border-radius: 50%;" alt="Aravind Lal"/><br />
+        <sub><b>Aravind Lal</b></sub>
+      </a><br />
+      <a href="https://github.com/mfscpayload-690"><sub><code>@mfscpayload-690</code></sub></a>
+    </td>
+    <td align="center" width="150px">
+      <a href="https://github.com/Benoommenmathew">
+        <img src="https://github.com/Benoommenmathew.png?size=100" width="100" height="100" style="border-radius: 50%;" alt="Ben Oommen Matthew"/><br />
+        <sub><b>Ben Oommen Matthew</b></sub>
+      </a><br />
+      <a href="https://github.com/Benoommenmathew"><sub><code>@Benoommenmathew</code></sub></a>
+    </td>
+    <td align="center" width="150px">
+      <a href="https://github.com/Bhavith-fs">
+        <img src="https://github.com/Bhavith-fs.png?size=100" width="100" height="100" style="border-radius: 50%;" alt="Bhavith Madhav"/><br />
+        <sub><b>Bhavith Madhav</b></sub>
+      </a><br />
+      <a href="https://github.com/Bhavith-fs"><sub><code>@Bhavith-fs</code></sub></a>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## Solves & Score Distribution
 
 ```
@@ -109,7 +139,7 @@ The workspace follows a category-isolated, per-challenge hierarchy:
 
 - **Steganography & Signal Processing:** `scipy`, `numpy`, `skimage`, `Pillow`, `sox`, `FFmpeg`
 - **Reverse Engineering & Disassembly:** `objdump`, `readelf`, `GDB`, `strace`, `ltrace`
-- **Network & System Forensics:** `tcpdump`, `Wireshark`, `tshark`, `fls`, `sleuthkit`
+- **Network & System Forensics:** `tcpdump`, `Wireshark`, `tshark`, `fls`, `sleuthkit`, `mitmproxy`
 - **Automation Solvers:** Custom Python disparity calculators, frame-stack statistical reducers, and SMT constraint solvers.
 
 ---
